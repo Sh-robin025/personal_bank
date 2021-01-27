@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Bank</title>
+    <!-- here is bootstrap style link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- here is external css style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="welcome-page" class="container">
+        <!-- here is welcome part -->
+        <h1 class="index">Hello World <br> Welcome To <span class="robin">Robin's</span> Account</h1>
+        <div class="container login-items">
+            <!-- here is input email -->
+            <div class="mb-3">
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Entre your E-mail">
+            </div>
+            <!-- here is input password -->
+            <div class="mb-3">
+                <input type="password" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Entre your password">
+            </div>
+            <!-- here is login btn -->
+            <button type="button" id="login" class="btn btn-outline-success col-4 ">login</button>
+        </div>
+    </header>
+    <main id="transection-area">
+        <!-- here is balance summary (2nd page) -->
+        <div class="container px-4">
+            <div class="row gx-6  mt-5">
+                <div class="col">
+                    <!-- here is deposit summary -->
+                    <div class="p-3 border deposit">
+                        <h5>Deposit</h5>
+                        <h2>$ <span id="current-deposit">00</span></h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- here is withdraw summary -->
+                    <div class="p-3 border Withdraw">
+                        <h5>Withdraw</h5>
+                        <h2>$ <span id="current-withdraw">00</span></h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- here is final balance -->
+                    <div class="p-3 border Balance">
+                        <h5>Ballance</h5>
+                        <h2>$ <span id="current-balance">1200</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- here is deposit and withdraw -->
+        <div class="container px-4">
+            <div class="row gx-5 mt-5">
+                <!-- here is deposit calculation -->
+                <div class="col m-5 p-3 border debit-credit">
+                    <h3>Deposit</h3>
+                    <input id="deposit-amount" class="mt-3 form-control" type="number"
+                        placeholder="$ amount you want to Deposit">
+                    <br>
+                    <button type="button" id="deposit-confirm" class="btn btn-outline-success col-4">Confirm</button>
+                </div>
+                <!--here is withdraw calculation-->
+                <div class="col m-5 p-3 debit-credit">
+                    <h3>Withdraw</h3>
+                    <input id="withdraw-amount" class="mt-3 form-control" type="number"
+                        placeholder="$ amount you want to Withdraw">
+                    <br>
+                    <button type="button" id="withdraw-confirm" class="btn btn-outline-success col-4">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- here is javascript code -->
+    <script>
+        // here is login btn event handler
+
+        const loginBtn = document.getElementById("login");
+        loginBtn.addEventListener("click", function () {
+            const welcomePage = document.getElementById("welcome-page");
+            welcomePage.style.display = "none";
+            const transectionArea = document.getElementById("transection-area");
+            transectionArea.style.display = "block";
+        })
+
+        // here is add deposit event handler
+
+        const confirmDeposit = document.getElementById("deposit-confirm");
+        confirmDeposit.addEventListener("click", function () {
+            const depositAmount = document.getElementById("deposit-amount").value;
+            depositNumber = parseFloat(depositAmount);
+
+            const currentDeposit = document.getElementById("current-deposit").innerText;
+            const currentDepositNumber = parseFloat(currentDeposit);
+            const totalDeposit = depositNumber + currentDepositNumber;
+            document.getElementById("current-deposit").innerText = totalDeposit;
+
+            const currentBalance = document.getElementById("current-balance").innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const total = depositNumber + currentBalanceNumber;
+            document.getElementById("current-balance").innerText = total;
+
+            document.getElementById("deposit-amount").value = "";
+        })
+
+
+
+        // here is withdraw event handler
+
+        const confirmWithdraw = document.getElementById("withdraw-confirm");
+        confirmWithdraw.addEventListener("click", function () {
+            const withdrawAmount = document.getElementById("withdraw-amount").value;
+            withdrawNumber = parseFloat(withdrawAmount);
+
+            const currentWithdraw = document.getElementById("current-withdraw").innerText;
+            const currentWithdrawNumber = parseFloat(currentWithdraw);
+            const totalWithdraw = currentWithdrawNumber + withdrawNumber;
+            document.getElementById("current-withdraw").innerText = totalWithdraw;
+
+            const currentBalance = document.getElementById("current-balance").innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const total = currentBalanceNumber - withdrawNumber;
+            document.getElementById("current-balance").innerText = total;
+
+            document.getElementById("withdraw-amount").value = "";
+        })
+
+    </script>
+</body>
+
+</html>
